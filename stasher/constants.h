@@ -1,0 +1,20 @@
+#pragma once
+
+const uint32_t MAX_STRING_BYTES = 1500;
+const std::string KEY_PROPERTY = "__key__";
+
+enum PropertyType {
+    PROPERTY_TYPE_NONE,
+    PROPERTY_TYPE_KEY,
+    PROPERTY_TYPE_INT64,
+    PROPERTY_TYPE_FLOAT,
+    PROPERTY_TYPE_UNICODE,
+    PROPERTY_TYPE_BOOLEAN,
+    PROPERTY_TYPE_TEXT,
+    PROPRETY_TYPE_BLOB,
+    PROPERTY_TYPE_DATETIME
+};
+
+
+
+
