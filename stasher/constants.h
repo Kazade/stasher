@@ -3,6 +3,8 @@
 const uint32_t MAX_STRING_BYTES = 1500;
 const std::string KEY_PROPERTY = "__key__";
 
+typedef uint64_t Timestamp;
+
 enum PropertyType {
     PROPERTY_TYPE_NONE,
     PROPERTY_TYPE_KEY,

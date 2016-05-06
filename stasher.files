@@ -8,3 +8,5 @@ stasher/entity.h
 stasher/exceptions.h
 stasher/validators.h
 stasher/validators.cpp
+stasher/datastore.h
+stasher/journal.h
