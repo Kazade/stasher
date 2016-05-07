@@ -18,7 +18,8 @@ class Journal {
 public:
     Entity get(Timestamp=0); // Returns the most recent entity, or the one given by the timestamp if specified
 
-    void write(Entity new_entity);
+    Timestamp write(Entity new_entity);
+    void commit(Timestamp time);
     void clean(); // Cleans up entries older than 60 seconds (max transaction period)
 
 private:

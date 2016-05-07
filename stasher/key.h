@@ -13,6 +13,7 @@ enum KeyType {
 
 class Key {
 public:
+    Key(const std::string& kind, const std::string& ns="");
     Key(const std::string& kind, int64_t id, const std::string& ns="");
     Key(const std::string& kind, const std::string& name, const std::string& ns="");
     Key(std::shared_ptr<Key> parent_key, int64_t id);
@@ -27,6 +28,10 @@ public:
     bool is_id() const { return type_ == KEY_TYPE_INT64; }
     bool is_name() const { return type_ == KEY_TYPE_UNICODE; }
 
+    bool is_complete() const {
+        return (type_ == KEY_TYPE_INT64 && int_value_ > 0) ||
+                (type_ == KEY_TYPE_UNICODE && !string_value_.empty());
+    }
 private:
     void set_value(int64_t value);
     void set_value(const std::string& value);

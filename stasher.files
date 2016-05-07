@@ -10,3 +10,7 @@ stasher/validators.h
 stasher/validators.cpp
 stasher/datastore.h
 stasher/journal.h
+tests/test_journal.h
+stasher/id_allocator.h
+stasher/id_allocator.cpp
+tests/CMakeLists.txt

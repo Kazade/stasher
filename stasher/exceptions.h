@@ -2,15 +2,22 @@
 
 #include <stdexcept>
 
-class StasherError: public std::exception {
+class StasherError: public std::runtime_error {
 public:
     StasherError(const std::string& what):
-        std::exception(what) {}
+        std::runtime_error(what) {}
 };
 
-class ValueError:
+class InvalidValueError:
     public StasherError {
 public:
-    ValueError(const std::string& what):
+    InvalidValueError(const std::string& what):
+        StasherError(what) {}
+};
+
+class EntityNotFoundError:
+    public StasherError {
+public:
+    EntityNotFoundError(const std::string& what):
         StasherError(what) {}
 };
