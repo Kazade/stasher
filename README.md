@@ -5,3 +5,14 @@ Stasher is an in-memory reimplementation of the Google App Engine datastore. It 
  - To massively outperform the SQLite stub by not serializing to protobufs
  - To provide a Python API for monkey-patching the Python GAE testbed 
  - To use an architecture that will allow for persistent storage in future
+
+# Building
+
+Stasher requires CMake. To build do the following:
+
+- mkdir build && cd build
+- cmake ..
+- make
+- ./tests/stasher_tests
+
+I'm trying to avoid dependencies where possible :)

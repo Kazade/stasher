@@ -18,3 +18,4 @@ tests/kaztest/kaztest.h
 bin/kaztest_gen
 stasher/property.cpp
 stasher/entity.cpp
+README.md
