@@ -1,7 +1,7 @@
 #include "key.h"
 #include "validators.h"
 
-Key::Key(const std::string& kind, int64_t id, const std::string& ns):
+Key::Key(const std::string& kind, int64_t id, const Namespace& ns):
     kind_(kind),
     type_(KEY_TYPE_INT64),
     namespace_(ns) {
@@ -9,7 +9,7 @@ Key::Key(const std::string& kind, int64_t id, const std::string& ns):
     set_value(id);
 }
 
-Key::Key(const std::string& kind, const std::string& name, const std::string& ns):
+Key::Key(const std::string& kind, const std::string& name, const Namespace &ns):
     kind_(kind),
     type_(KEY_TYPE_UNICODE),
     namespace_(ns) {

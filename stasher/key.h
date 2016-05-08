@@ -11,14 +11,36 @@ enum KeyType {
     KEY_TYPE_UNICODE
 };
 
+struct Namespace {
+public:
+    Namespace() {}
+
+    Namespace(const std::string& ns):
+        namespace_(ns) {}
+
+    Namespace& operator=(const char* ns) {
+        *this = std::string(ns);
+        return *this;
+    }
+
+    Namespace& operator=(const std::string& ns) {
+        namespace_ = ns;
+        return *this;
+    }
+
+private:
+    std::string namespace_;
+};
+
 class Key {
 public:
     Key() {}
     Key(const Key& key) = default;
 
-    Key(const std::string& kind, const std::string& ns="");
-    Key(const std::string& kind, int64_t id, const std::string& ns="");
-    Key(const std::string& kind, const std::string& name, const std::string& ns="");
+    Key(const std::string& kind, const Namespace& ns=Namespace(""));
+    Key(const std::string& kind, int64_t id, const Namespace& ns=Namespace(""));
+    Key(const std::string& kind, const std::string& name, const Namespace& ns=Namespace(""));
+
     Key(std::shared_ptr<Key> parent_key, int64_t id);
     Key(std::shared_ptr<Key> parent_key, const std::string& name);
 
@@ -26,7 +48,7 @@ public:
     Key* entity_group_key() const { return root_key_; }
 
     std::string kind() const { return kind_; }
-    std::string ns() const { return namespace_; }
+    Namespace ns() const { return namespace_; }
 
     bool is_id() const { return type_ == KEY_TYPE_INT64; }
     bool is_name() const { return type_ == KEY_TYPE_UNICODE; }
@@ -44,7 +66,7 @@ private:
     Key* root_key_ = nullptr;
 
     std::string kind_;
-    std::string namespace_;
+    Namespace namespace_;
 
     KeyType type_ = KEY_TYPE_INT64;
     int64_t int_value_ = 0;

@@ -9,7 +9,7 @@ public:
     Entity(const std::string& kind, int64_t id);
     Entity(const std::string& kind, const std::string& name);
 
-    Property key() const { return properties_.at(KEY_PROPERTY); }
+    Property key() const { return key_; }
     Property get(const std::string& property) const { return properties_.at(property); }
 
     void set(const std::string& property, Property value);
@@ -39,11 +39,10 @@ public:
     }
 
 private:
+    Key key_;
     std::map<std::string, Property> properties_;
 
     friend std::ostream& operator<<(std::ostream& os, const Entity& entity);
 };
 
-std::ostream& operator<<(std::ostream& os, const Entity& entity) {
-    assert(0 && "Not Implemented");
-}
+std::ostream& operator<<(std::ostream& os, const Entity& entity);
