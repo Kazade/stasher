@@ -16,7 +16,8 @@
  */
 class Journal {
 public:
-    Entity get(Timestamp=0); // Returns the most recent entity, or the one given by the timestamp if specified
+    Entity get_by_timestamp(Timestamp timestamp); // Returns the entity given by the timestamp
+    Entity get(); // Returns the most recent committed entity
 
     Timestamp write(Entity new_entity);
     void commit(Timestamp time);

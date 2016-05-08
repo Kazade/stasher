@@ -13,6 +13,9 @@ enum KeyType {
 
 class Key {
 public:
+    Key() {}
+    Key(const Key& key) = default;
+
     Key(const std::string& kind, const std::string& ns="");
     Key(const std::string& kind, int64_t id, const std::string& ns="");
     Key(const std::string& kind, const std::string& name, const std::string& ns="");
@@ -29,8 +32,9 @@ public:
     bool is_name() const { return type_ == KEY_TYPE_UNICODE; }
 
     bool is_complete() const {
-        return (type_ == KEY_TYPE_INT64 && int_value_ > 0) ||
-                (type_ == KEY_TYPE_UNICODE && !string_value_.empty());
+        return !kind_.empty() &&
+                ((type_ == KEY_TYPE_INT64 && int_value_ > 0) ||
+                (type_ == KEY_TYPE_UNICODE && !string_value_.empty()));
     }
 private:
     void set_value(int64_t value);
@@ -42,9 +46,7 @@ private:
     std::string kind_;
     std::string namespace_;
 
-    KeyType type_;
-    union {
-        int64_t int_value_;
-        std::string string_value_;
-    };
+    KeyType type_ = KEY_TYPE_INT64;
+    int64_t int_value_ = 0;
+    std::string string_value_;
 };

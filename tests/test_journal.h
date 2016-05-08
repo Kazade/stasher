@@ -1,5 +1,5 @@
-
-#include <kaztest/kaztest.h>
+#include <functional>
+#include "kaztest/kaztest.h"
 
 #include "../stasher/journal.h"
 #include "../stasher/id_allocator.h"
@@ -17,10 +17,10 @@ public:
         auto timestamp = journal.write(new_entity);
 
         // Nothing committed yet!
-        assert_raises(EntityNotFoundError, journal.get());
+        assert_raises(EntityNotFoundError, std::bind(&Journal::get, &journal));
 
         // Timestamp specified so we hit the uncommitted journal
-        assert_equal(new_entity, journal.get(timestamp));
+        assert_equal(new_entity, journal.get_by_timestamp(timestamp));
 
         // Commit the entity we wrote
         journal.commit(timestamp);

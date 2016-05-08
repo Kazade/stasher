@@ -6,6 +6,9 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 SET(
     SOURCES
     stasher/key.cpp
+    stasher/property.cpp
+    stasher/validators.cpp
+    stasher/entity.cpp
 )
 
 ADD_LIBRARY(
@@ -13,7 +16,4 @@ ADD_LIBRARY(
     ${SOURCES}
 )
 
-FIND_PACKAGE(KAZTEST)
-IF(KAZTEST_FOUND)
-    ADD_SUBDIRECTORY(tests)
-ENDIF()
+ADD_SUBDIRECTORY(tests)
