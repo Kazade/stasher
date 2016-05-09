@@ -23,7 +23,10 @@ public:
     Property(int32_t value): Property(int64_t(value)) {}
 
     Property(float value);
+
     Property(const std::string& utf8_string);
+    Property(const char* utf8_string): Property(std::string(utf8_string)) {}
+
     Property(bool value);
     Property(const DateTime& value);
     Property(TextPtr value);
@@ -44,7 +47,6 @@ private:
     union {
         int64_t int_value_;
         float float_value_;
-        char string_value_[MAX_STRING_BYTES];
         bool bool_value_;
         DateTime datetime_value_;
     };
@@ -52,8 +54,11 @@ private:
     // These should be part of the above union
     // but they are non-trivial and C++ doesn't allow that
     Key key_value_;
+    std::string string_value_;
     TextPtr text_value_;
     BlobPtr blob_value_;
+
+    friend std::ostream& operator<<(std::ostream& os, const Property& property);
 };
 
 template<>
@@ -67,5 +72,8 @@ inline std::string Property::value<std::string>() const {
     assert(type_ == PROPERTY_TYPE_UNICODE);
     return string_value_;
 }
+
+std::ostream& operator<<(std::ostream& os, const Property& property);
+
 
 #endif

@@ -71,4 +71,8 @@ private:
     KeyType type_ = KEY_TYPE_INT64;
     int64_t int_value_ = 0;
     std::string string_value_;
+
+    friend std::ostream& operator<<(std::ostream& os, const Key& property);
 };
+
+std::ostream& operator<<(std::ostream& os, const Key& property);

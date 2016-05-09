@@ -1,6 +1,21 @@
 #include "key.h"
 #include "validators.h"
 
+std::ostream& operator<<(std::ostream& os, const Key& key) {
+    os << std::string("<Key ");
+    os << key.kind();
+    os << std::string(" ");
+    if(key.is_id()) {
+        os << std::string("id=");
+        os << std::to_string(key.int_value_);
+    } else {
+        os << std::string("name=");
+        os << key.string_value_;
+    }
+    os << std::string(">");
+    return os;
+}
+
 Key::Key(const std::string& kind, int64_t id, const Namespace& ns):
     kind_(kind),
     type_(KEY_TYPE_INT64),

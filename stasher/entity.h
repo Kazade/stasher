@@ -9,7 +9,7 @@ public:
     Entity(const std::string& kind, int64_t id);
     Entity(const std::string& kind, const std::string& name);
 
-    Property key() const { return key_; }
+    Key key() const { return key_; }
     Property get(const std::string& property) const { return properties_.at(property); }
 
     void set(const std::string& property, Property value);
@@ -38,6 +38,8 @@ public:
         return !(*this == rhs);
     }
 
+    void each(std::function<void (uint32_t i, const std::string&, const Property&)> func) const;
+    uint32_t property_count() const { return properties_.size(); }
 private:
     Key key_;
     std::map<std::string, Property> properties_;
