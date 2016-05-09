@@ -19,3 +19,7 @@ bin/kaztest_gen
 stasher/property.cpp
 stasher/entity.cpp
 README.md
+stasher/journal.cpp
+stasher/threading/shared_mutex.h
+stasher/time_utils.h
+stasher/time_utils.cpp

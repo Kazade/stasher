@@ -9,6 +9,8 @@ SET(
     stasher/property.cpp
     stasher/validators.cpp
     stasher/entity.cpp
+    stasher/journal.cpp
+    stasher/time_utils.cpp
 )
 
 ADD_LIBRARY(

@@ -5,6 +5,8 @@
 #include "constants.h"
 #include "entity.h"
 
+#include "threading/shared_mutex.h"
+
 /**
  * @brief Current and recent entity data store.
  *
@@ -20,10 +22,11 @@ public:
     Entity get(); // Returns the most recent committed entity
 
     Timestamp write(Entity new_entity);
-    void commit(Timestamp time);
+    void commit(Timestamp time, Timestamp expected=0);
     void clean(); // Cleans up entries older than 60 seconds (max transaction period)
 
 private:
+    shared_mutex entries_mutex_;
     std::map<Timestamp, Entity> entries_;
     std::atomic<Timestamp> committed_;
 };
